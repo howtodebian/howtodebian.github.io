@@ -1,0 +1,16 @@
+echo
+echo "This can take a while. Best make some coffee."
+echo
+echo "1/9  We'll use RAM to cache the incoming downloads."; sleep 1s; mount -t tmpfs -o size=3G tmpfs /var/cache/apt/archives
+echo "2/9  Now we set the repository."; sleep 1s; echo "deb http://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sources.list
+echo "3/9  And pull down the repository information."; sleep 1s; apt-get update &> /dev/null
+echo "4/9  Then we make sure the base system is up-to-date."; sleep 1s; apt-get dist-upgrade -y &> /dev/null
+echo "5/9  And install the graphical environment."; sleep 1s; apt-get install gnome-core gnome-initial-setup gnome-software-plugin-flatpak firefox fonts-noto tlp -y &> /dev/null
+echo "6/9  Now we can populate the Software app."; sleep 1s; flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &> /dev/null
+echo "7/9  Some little tweaks."; sleep 1s; echo "tmpfs /tmp tmpfs defaults 0 0" >> /etc/fstab; echo "tmpfs /var/log tmpfs defaults 0 0" >> /etc/fstab; echo "APT::Periodic::Update-Package-Lists \"1\";" > /etc/apt/apt.conf.d/10periodic
+echo "8/9  Finally we update the bootloader."; sleep 1s; update-grub &> /dev/null
+echo "9/9  And flush any cached writes to disk."; sync
+echo
+echo "All done! Type \"reboot\" to start using Debian."
+echo
+exit

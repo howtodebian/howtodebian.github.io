@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta property="og:description" content="Guide on how to install Debian">
+	<meta property="og:title" content="Install Debian">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Guide on how to install Debian">
+	<meta name="robots" content="index, follow">
+	<meta name="theme-color" content="#808080">
+	<title>Install Debian</title>
+	<style>
+		@font-face {font-family: "HeaderCantarell"; src: url(HeaderCantarell.otf);}
+		@font-face {font-family: "TextCantarell"; src: url(TextCantarell.otf);}
+		body	{margin: auto; overflow-x: hidden; background-color: #808080;}
+		.text	{max-width: 70ch; font-family: Cantarell,"TextCantarell",sans-serif; margin: auto; background-color: #ffffff; padding: 1ch; color: #000000; line-height: 1.5em; overflow-x: hidden;}
+		h1	{font-family: Cantarell,"HeaderCantarell",sans-serif;}
+		h2	{font-family: Cantarell,"HeaderCantarell",sans-serif;}
+		a	{text-decoration: none;}
+		code	{font-family: monospace; background-color: #808080; color: #ffffff;}
+		img	{max-width: 100%; max-height: 90vh; margin: auto; display: block;}
+	</style>
+</head>
+<body>
+
+<img src="banner.png">
+
+<div class="text">
+
+<h1 id="1">How to Debian</h1>
+
+<p>This guide will help you installing Debian, preferably alongside Windows. I added many pictures of basically every step of the installation process so it'll surely be easy going. Special thought has gone into all kinds of things, like internet connectivity, NVIDIA drivers, Broadcom Wi-Fi drivers, power management, gaming! It'll be easy!</p>
+
+<h2 id="2">Table of Contents</h2>
+
+<ul>
+	<li><a href="#1">How to Debian</a></li>
+	<li><a href="#2">Table of Contents</a></li>
+	<li><a href="#3">Windows</a>
+	<li><a href="#4">Installation</a></li>
+	<li><a href="#5">Tips & Tricks & Troubleshoots</a></li>
+	<li><a href="#6">Changelog</a></li>
+	<li><a href="#7">Contact</a></li>
+</ul>
+
+<h2 id="3">Windows</h2>
+<ol>
+<li><p>If you want to only have Debian installed, go to step 4, if you want to have Debian and Windows installed on separate drives, go to step 4. If you want to have Debian and Windows installed on the same disk, go to step 2.</p></li>
+<li><p>Right-click the start menu and select "Disk Management" or press the windows key together with the R key and enter <code>diskmgmt.msc</code>.</p></li>
+<li><p>Identify your Windows installation on the bottom half and right-click it, then select "Shrink Volume..." and shrink the Windows installation by at least 20 000 MB, more is better.</p></li>
+<li><p>Type <code>msinfo32</code> in your start menu and under "System Summary -> BIOS Mode" check if it says UEFI or Legacy. Remember this or write it down.</p></li>
+<li><p>Get a copy of <a href="https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso">Debian</a>, as well as <a href="https://rufus.akeo.ie/">Rufus</a>.</p></li>
+<li><p>Insert a spare USB flash drive into your computer and open Rufus.</p></li>
+<li><p>Inside Rufus select the following:</p>
+<ul><li>"Device" and your spare USB flash drive</li>
+<li>"SELECT" and the <code>debian-testing-amd64-netinst.iso</code> file</li>
+<li>"Partition scheme" and GPT</li>
+<li>"START" and DD.</li></li></ul>
+<li><p>If you have Windows 8 or Windows 10, right-click the start menu and select "Power options", then select "Choose what the power buttons do" on the left, and make sure the option for "Fast startup" is unchecked/disabled.</p></li>
+</ol>
+
+<h2 id="4">Installation</h2>
+
+<p>Prepare yourself for lots of images! I've made a screenshot of every step of the installation, including exactly what to click on, so enjoy! Underneath every image I put an explanation, in case it can use one.</p>
+
+<p>First you'll have to boot into the installation. Inside Windows 8 & 10, you can hold shift, and right-click the start menu, then click reboot. You'll be shown a screen. Choose to use a device, and then (UEFI)USBname, or if you're not using UEFI, just USBname. If you don't see that, then try holding F11 or F12 or F8 during a reboot and see if you can get a prompt from your BIOS.</p>
+
+<p>Note that if you don't use cabled internet, you can plug in an Android phone to your computer and enable "USB tethering" to get temporary internet access anyway. It will use your phone's Wi-Fi, so you don't need a SIM in it.</p>
+
+<img src="Images/01.png">
+<p>For the images in the guide we'll go ahead and use 'Graphical install' but there's also the Advanced option to do an expert install. That involves mostly clicking, but gives you some extra choices during installation which will possibly get you confused. It's more for people who wouldn't dream of following a guide!</p>
+<img src="Images/02.png">
+<p>You can choose any language you want from the list. The installation process will look differently, obviously, but you'll likely still be able to follow the guide along.</p>
+<img src="Images/03.png">
+<p>This part makes it slightly nicer when you've finished installing. You can still set the locale in the Settings app afterwards of course.</p>
+<img src="Images/04.png">
+<img src="Images/05.png">
+<p>This is the name that will be shown in your router and at some places inside of Debian. It's like "Katherine's iPad". Now is your time to set it to "Deathstar" or "Typewriter".</p>
+<img src="Images/06.png">
+<p>If this is not filled in already, then you can just leave this blank. If it is filled in already, then you can leave it as the default.</p>
+<img src="Images/07.png">
+<p>I would recommend you leave this blank, which results in a more Windows/Mac like administrator account experience. Where you enter your password or click 'Yes' sometimes, instead of logging into 'su' to do so. If you don't know the difference between 'sudo su'  and 'su', it's best to leave this blank.</p>
+<img src="Images/08.png">
+<img src="Images/09.png">
+<img src="Images/10.png">
+<img src="Images/11.png">
+<p>We'll choose 'Manual' here. If you intend to do without Windows and/or use an entire SSD for Debian, then you can go ahead and choose the guided, or the guided encrypted one instead of Manual.</p>
+<img src="Images/12.png">
+<p>I used a virtual machine to take the screenshots, so the only disk I have available here is an empty one. You should see a label called FREE SPACE instead, and go directly to two images down.</p>
+<img src="Images/13.png">
+<img src="Images/14.png">
+<p>This is where you'll be if you're using the same SSD as for Windows.</p>
+<img src="Images/15.png">
+<img src="Images/16.png">
+<p>It'll automatically show the maximum amount of free space available on the disk.</p>
+<img src="Images/17.png">
+<p>You'll only see this when you're not using UEFI.</p>
+<img src="Images/18.png">
+<img src="Images/19.png">
+<p>Discard is useful for SSDs, but not needed for HDDs.</p>
+<img src="Images/20.png">
+<img src="Images/21.png">
+<img src="Images/22.png">
+<img src="Images/23.png">
+<img src="Images/24.png">
+<img src="Images/25.png">
+<p>Welcome back, guided and guided encrypted users!</p>
+<img src="Images/26.png">
+<img src="Images/27.png">
+<img src="Images/28.png">
+<p><code>deb.debian.org</code> will work for everyone, no matter where you are.</p>
+<img src="Images/29.png">
+<img src="Images/30.png">
+<p>If you're scared of any kind of telemetry and yet still somehow have an internet subscription, then you should choose 'No'.</p>
+<img src="Images/31.png">
+<p>We don't want any of this.</p>
+<img src="Images/32.png">
+<p>This only shows for non-UEFI computers. For UEFI computers, it'll show something about EFI removable path, for which you want to probably go with the default of 'No'.</p>
+<img src="Images/33.png">
+<p>This should only be shown to non-UEFI computers.</p>
+<img src="Images/34.png">
+<img src="Images/35.png">
+<p>Yay we're booting into Debian! You'll probably see an entry for Windows too, as well as 'System setup' or similar if you're on UEFI. That last one gets you into your UEFI settings.</p>
+<img src="Images/36.png">
+<p>Log in with your username and password, then type <code>sudo su</code> and your password again to enter root.</p>
+<img src="Images/37.png">
+<p>Enter <code>apt install curl -y</code></p>
+<img src="Images/38.png">
+<p>When it says done, enter <code>curl -o ~/helpinghand https://howtodebian.github.io/helpinghand && chmod +x ~/helpinghand && clear && ./helpinghand</code> and it'll finish installing.</p>
+<img src="Images/39.png">
+<p>This can take a while. And it might look a bit different from the screenshot, as I update the helping hand.</p>
+<img src="Images/40.png">
+<p>It's looking much prettier already!</p>
+<img src="Images/41.png">
+<img src="Images/42.png">
+<p>The time at the top of the screen is all wrong for me, and it might be for you too. We'll resolve that later. If you don't want to play Steam games, then GNOME is the best option, GNOME on Xorg is for games. You won't see Xorg if you have an NVIDIA graphics card.</p>
+<img src="Images/43.png">
+<p>Click the dots at the bottom to search for something else.</p>
+<img src="Images/44.png">
+<img src="Images/45.png">
+<p>I think Debian loves privacy so much that even though this is an option, I don't think it does anything; like automatically setting the time correctly.</p>
+<img src="Images/46.png">
+<img src="Images/47.png">
+<img src="Images/48.png">
+<img src="Images/49.png">
+<p>Press the windows key or command key and type 'Tweaks'. Then click the big icon. This is a graphical application to do some quick tweaks. See, you can also search for a variety of things like characters. Try typing 'Popper', then click the result and you can paste a party popper everywhere! 🎉 It also works with calculations (try '2+2'), applications in the Software app (try 'mGBA'), and files on your computer!</p>
+<img src="Images/50.png">
+<p>Animations: OFF. They can be too taxing on Linux</p>
+<img src="Images/51.png">
+<p>Totally optional: you can set the Hinting to Full. You'll likely notice no difference, but it can make text a bit more readable. Anti-aliasing Standard works best; while subpixel does work, the lcdfilter is not good enough and you'll grow really annoyed with the fonts.</p>
+<img src="Images/52.png">
+<p>Flat disables mouse acceleration, and I don't know about the others because I'm basically a professional 1337 FPS shooter gamer in my spare time (when I'm not writing guides on Debian, of course) so I wouldn't dream of using mouse acceleration.</p>
+<img src="Images/53.png">
+<p>Top right is quick settings. Wrench and screwdriver goes to the settings app. Play around, have fun, set the time correctly. Consult the Help app in case you're confused. Join your Wi-Fi network, set DNS servers, consult ntp servers, proxy the VPN...</p>
+<img src="Images/54.png">
+<p>...or Power Off the computer.</p>
+
+<h2 id="5">Tips & Tricks & Troubleshoots</h2>
+
+<p>I'll put neat things in here.</p>
+
+<h2 id="6">Changelog</h2>
+
+<p>I'll put updates here.</p>
+
+<h2 id="7">Contact</h2>
+
+<p>Everyone who I sent this link to already knows me. I'll have to find a good way to let strangers contact me.</p>
+
+</div>
+</body>
+</html>
