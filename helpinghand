@@ -6,6 +6,17 @@ echo " (2/9) Now we set the repository."; sleep 1s; echo "deb http://deb.debian.
 echo " (3/9) And pull down the repository information."; sleep 1s; apt-get update &> /dev/null
 echo " (4/9) Then we make sure the base system is up-to-date."; sleep 1s; apt-get dist-upgrade -y &> /dev/null
 echo " (5/9) And install the graphical environment."; sleep 1s; apt-get install gnome-core gnome-initial-setup gnome-software-plugin-flatpak firefox fonts-noto tlp -y &> /dev/null
+	if [[ $(lspci | grep NVIDIA) ]]; then
+		if [[ $(lspci | grep Broadcom) ]]; then
+	    		apt-get install nvidia-driver broadcom-sta-dkms -y &> /dev/null
+		else
+	  		apt-get install nvidia-driver -y &> /dev/null
+		fi
+	else
+		if [[ $(lspci | grep Broadcom) ]]; then
+			apt-get install broadcom-sta-dkms -y &> /dev/null
+		fi
+	fi
 echo " (6/9) Now we can populate the Software app."; sleep 1s; flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo &> /dev/null
 echo " (7/9) Some little tweaks."; sleep 1s; echo "tmpfs /tmp tmpfs defaults 0 0" >> /etc/fstab; echo "tmpfs /var/log tmpfs defaults 0 0" >> /etc/fstab; echo "APT::Periodic::Enable \"1\";" > /etc/apt/apt.conf.d/10periodic; echo "APT::Periodic::Update-Package-Lists \"1\";" >> /etc/apt/apt.conf.d/10periodic; echo "APT::Periodic::AutocleanInterval \"1\";" >> /etc/apt/apt.conf.d/10periodic
 echo " (8/9) Finally we update the bootloader."; sleep 1s; update-grub &> /dev/null
