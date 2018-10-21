@@ -5,7 +5,7 @@ echo " (1/9) We'll use RAM to cache the incoming downloads."; sleep 1s; mount -t
 echo " (2/9) Now we set the repository."; sleep 1s; echo "deb http://deb.debian.org/debian/ sid main non-free contrib" > /etc/apt/sources.list
 echo " (3/9) And pull down the repository information."; sleep 1s; apt-get update &> /dev/null
 echo " (4/9) Then we make sure the base system is up-to-date."; sleep 1s; apt-get dist-upgrade -y &> /dev/null
-echo " (5/9) And install the graphical environment."; sleep 1s; apt-get install firefox fonts-noto gnome-core gnome-initial-setup gnome-software-plugin-flatpak linux-firmware task-print-server tlp -y &> /dev/null
+echo " (5/9) And install the graphical environment."; sleep 1s; apt-get install firefox firmware-linux fonts-noto gnome-core gnome-initial-setup gnome-software-plugin-flatpak task-print-server tlp -y &> /dev/null
 	if [[ $(lspci | grep NVIDIA) ]]; then
 		if [[ $(lspci | grep Broadcom) ]]; then
 	    		apt-get install nvidia-driver broadcom-sta-dkms -y &> /dev/null
